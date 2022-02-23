@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_travel_concept/screens/home.dart';
 import 'package:flutter_travel_concept/widgets/icon_badge.dart';
+import './favourites_screen.dart';
+import './home.dart';
 
 class MainScreen extends StatefulWidget {
   @override
@@ -10,30 +12,62 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
   PageController _pageController;
   int _page = 0;
+  int focusedPage = 0;
+
+  static List<Widget> _widgetOptions = <Widget>[
+    Home(),
+    FavouritesScreen(),
+  ];
+
+  void _onItemTapped(int index) {
+    setState(() {
+      focusedPage = index;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: PageView(
-        physics: NeverScrollableScrollPhysics(),
-        controller: _pageController,
-        onPageChanged: onPageChanged,
-        children: List.generate(4, (index) => Home()),
-      ),
-      bottomNavigationBar: BottomAppBar(
-        child: Row(
-          mainAxisSize: MainAxisSize.max,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: <Widget>[
-            SizedBox(width: 7.0),
-            barIcon(icon: Icons.home, page: 0),
-            barIcon(icon: Icons.favorite, page: 1),
-            barIcon(icon: Icons.mode_comment, page: 2, badge: true),
-            barIcon(icon: Icons.person, page: 3),
-            SizedBox(width: 7.0),
-          ],
+      // body: PageView(
+      //   physics: NeverScrollableScrollPhysics(),
+      //   controller: _pageController,
+      //   onPageChanged: onPageChanged,
+      //   children: List.generate(4, (index) => Home()),
+      // ),
+      body: _widgetOptions.elementAt(focusedPage),
+      bottomNavigationBar: Container(
+        decoration: BoxDecoration(
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey,
+              blurRadius: 10,
+              offset: Offset(0, -3),
+            )
+          ]
         ),
-        color: Theme.of(context).primaryColor,
+        child: BottomNavigationBar(
+          selectedItemColor: Colors.black,
+          elevation: 10,
+              items: const <BottomNavigationBarItem>[
+                BottomNavigationBarItem(
+                  icon: Icon(
+                    Icons.home,
+                  ),
+                  label: '',
+                  backgroundColor: Colors.white,
+                ),
+                BottomNavigationBarItem(
+                    icon: Icon(
+                      Icons.favorite,
+                    ),
+                    label: '',
+                    backgroundColor: Colors.white,
+                ),
+              ],
+              currentIndex: focusedPage,
+              iconSize: 20,
+              onTap: _onItemTapped,
+              ),
       ),
     );
   }

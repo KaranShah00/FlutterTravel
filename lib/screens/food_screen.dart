@@ -4,12 +4,12 @@ import 'package:flutter_travel_concept/widgets/horizontal_place_item.dart';
 import 'package:flutter_travel_concept/widgets/icon_badge.dart';
 import 'package:flutter_travel_concept/widgets/vertical_place_item.dart';
 
-class Home extends StatelessWidget {
+class FoodScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Nearby Places'),
+        title: Text('Food'),
         actions: <Widget>[
             Padding(
               padding: const EdgeInsets.all(8.0),
@@ -66,9 +66,9 @@ class Home extends StatelessWidget {
         primary: false,
         physics: NeverScrollableScrollPhysics(),
         shrinkWrap: true,
-        itemCount: shopping_places == null ? 0 : shopping_places.length,
+        itemCount: food_places == null ? 0 : food_places.length,
         itemBuilder: (BuildContext context, int index) {
-          Map place = shopping_places[index];
+          Map place = food_places[index];
           return VerticalPlaceItem(place: place);
         },
       ),

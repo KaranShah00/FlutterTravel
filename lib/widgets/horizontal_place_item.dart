@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 
 import '../screens/details.dart';
+import '../screens/entertainment_screen.dart';
+import '../screens/food_screen.dart';
+import '../screens/shopping_screen.dart';
+import '../screens/tourism_screen.dart';
+
 
 class HorizontalPlaceItem extends StatelessWidget {
   final Map place;
@@ -9,22 +14,18 @@ class HorizontalPlaceItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    //debugPrint(place["image"]);
     return Padding(
       padding: const EdgeInsets.only(right: 20.0),
       child: InkWell(
         child: Container(
-          height: 250.0,
+          height: 150.0,
           width: 140.0,
           child: Column(
             children: <Widget>[
               ClipRRect(
                 borderRadius: BorderRadius.circular(10),
-                child: Image.asset(
-                  "${place["img"]}",
-                  height: 178.0,
-                  width: 140.0,
-                  fit: BoxFit.cover,
-                ),
+                child: Image.network(place["image"], height: 100, width: 150, fit: BoxFit.fitHeight,),
               ),
               SizedBox(height: 7.0),
               Container(
@@ -38,21 +39,7 @@ class HorizontalPlaceItem extends StatelessWidget {
                   maxLines: 2,
                   textAlign: TextAlign.left,
                 ),
-              ),
-              SizedBox(height: 3.0),
-              Container(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  "${place["location"]}",
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 13.0,
-                    color: Colors.blueGrey[300],
-                  ),
-                  maxLines: 1,
-                  textAlign: TextAlign.left,
-                ),
-              ),
+              )
             ],
           ),
         ),
@@ -60,7 +47,18 @@ class HorizontalPlaceItem extends StatelessWidget {
           Navigator.of(context).push(
             MaterialPageRoute(
               builder: (BuildContext context) {
-                return Details();
+                if(place["name"] == "Shopping") {
+                  return ShoppingScreen();
+                }
+                else if(place["name"] == "Tourism") {
+                  return TourismScreen();
+                }
+                else if(place["name"] == "Food") {
+                  return FoodScreen();
+                }
+                else {
+                  return EntertainmentScreen();
+                }
               },
             ),
           );

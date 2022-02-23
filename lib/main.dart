@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_travel_concept/screens/main_screen.dart';
 import 'package:flutter_travel_concept/util/const.dart';
 
+import './screens/welcome_screen.dart';
+
 void main() async {
   runApp(MyApp());
 }
@@ -19,7 +21,7 @@ class _MyAppState extends State<MyApp> {
       title: Constants.appName,
       theme: Constants.lightTheme,
       darkTheme: Constants.darkTheme,
-      home: MainScreen(),
+      home: WelcomeScreen(),
     );
   }
 }

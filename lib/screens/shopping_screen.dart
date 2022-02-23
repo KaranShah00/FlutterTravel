@@ -4,12 +4,12 @@ import 'package:flutter_travel_concept/widgets/horizontal_place_item.dart';
 import 'package:flutter_travel_concept/widgets/icon_badge.dart';
 import 'package:flutter_travel_concept/widgets/vertical_place_item.dart';
 
-class Home extends StatelessWidget {
+class ShoppingScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Nearby Places'),
+        title: Text('Shopping'),
         actions: <Widget>[
             Padding(
               padding: const EdgeInsets.all(8.0),

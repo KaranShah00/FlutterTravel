@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+
 import '../screens/details.dart';
 
 class VerticalPlaceItem extends StatelessWidget {
@@ -18,11 +20,11 @@ class VerticalPlaceItem extends StatelessWidget {
             children: <Widget>[
               ClipRRect(
                 borderRadius: BorderRadius.circular(5),
-                child: Image.asset(
-                  "${place["img"]}",
-                  height: 70.0,
-                  width: 70.0,
-                  fit: BoxFit.cover,
+                child: Image.network(
+                  place["img"],
+                  height: 70,
+                  width: 70,
+                  fit: BoxFit.fitHeight,
                 ),
               ),
               SizedBox(width: 15.0),
@@ -70,18 +72,22 @@ class VerticalPlaceItem extends StatelessWidget {
                         ),
                       ],
                     ),
-                    SizedBox(height: 10.0),
-                    Container(
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        "${place["price"]}",
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 16.0,
+                    RatingBar.builder(
+                        itemSize: 20,
+                        initialRating: 3,
+                        minRating: 1,
+                        direction: Axis.horizontal,
+                        allowHalfRating: true,
+                        itemCount: 5,
+                        itemPadding: EdgeInsets.symmetric(horizontal: 0.0),
+                        itemBuilder: (context, _) => Icon(
+                          Icons.star,
+                          size: 5,
+                          color: Colors.amber,
                         ),
-                        maxLines: 1,
-                        textAlign: TextAlign.left,
-                      ),
+                        onRatingUpdate: (rating) {
+                          print(rating);
+                        },
                     ),
                   ],
                 ),
@@ -93,7 +99,7 @@ class VerticalPlaceItem extends StatelessWidget {
           Navigator.of(context).push(
             MaterialPageRoute(
               builder: (BuildContext context) {
-                return Details();
+                return Details(place);
               },
             ),
           );
